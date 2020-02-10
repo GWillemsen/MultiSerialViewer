@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="MultiSerialViewer.SerialConnection"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MultiSerialViewer"
+             mc:Ignorable="d" 
+             d:DesignHeight="250" d:DesignWidth="400"
+             Loaded="SerialConnection_Loaded"
+             Unloaded="UserControl_Unloaded">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <Menu.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <DockPanel HorizontalAlignment="Stretch"/>
+                </ItemsPanelTemplate>
+            </Menu.ItemsPanel>
+            <MenuItem Header="Open" Name="mniOpen" Click="mniOpen_Click" IsEnabled="False"/>
+            <MenuItem Header="X" Name="mniExit" Click="mniExit_Click" HorizontalAlignment="Right"/>
+        </Menu>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="20"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
+                <ComboBox Name="cboPorts" Width="100" HorizontalAlignment="Left" VerticalAlignment="Center" SelectionChanged="cboPorts_SelectionChanged" Margin="5" />
+                <TextBox Name="txbBaud" Text="115200" PreviewTextInput="txbBaud_PreviewTextInput" Margin="5" Width="80" TextAlignment="Center" MaxLength="7" />
+                <TextBlock Name="lblConnected"/>
+            </StackPanel>
+            <RichTextBox Grid.Column="0" FontFamily="Consolas" Name="rtbData" Grid.Row="1" PreviewTextInput="rtbData_PreviewTextInput" PreviewKeyDown="rtbData_KeyDown" Background="Black" VerticalScrollBarVisibility="Visible" Foreground="White">
+                <RichTextBox.Resources>
+                    <Style TargetType="{x:Type Paragraph}">
+                        <Setter Property="Margin" Value="0"/>
+                    </Style>
+                </RichTextBox.Resources>
+            </RichTextBox>
+            <Grid Background="Gray" Margin="4" Grid.Column="1" Grid.RowSpan="2" Name="griSizeDragger" MouseDown="griSizeDragger_MouseDown" MouseUp="griSizeDragger_MouseUp" MouseMove="griSizeDragger_MouseMove"/>
+        </Grid>
+    </DockPanel>
+</UserControl>
